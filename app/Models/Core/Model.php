@@ -1,5 +1,5 @@
 <?php
-namespace App\Models;
+namespace App\Models\Core;
 class Model extends DBConnect
 {
     protected $table;
