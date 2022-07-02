@@ -1,19 +1,4 @@
-body {
-    font-family: Arial, sans-serif;
-    font-weight: 400;
-    font-size: 14px;
-}
-.wrapper {
-    width: 960px;
-    margin: 0 auto;
-}
-.logo {
-    width: 722px;
-    height: 450px;
-    
-    background-image: url('');
-    margin: auto;
-}
+
 .support-button {
     position: absolute;
     cursor: pointer;
@@ -24,7 +9,6 @@ body {
     background-image: url('');
 }
 .container {
-    max-width: 960px;
     border: 1px solid #ccc;
     padding: 20px;
     margin: 30px 0 30px 0;
