@@ -15,7 +15,7 @@
                  
 
               if($_SESSION['user']['role_id'] == 1){
-               $modules = ['Roles','Users','Categery','products'];
+               $modules = ['Roles','Users','Categery','products','Orders','check'];
                }
                 else{
                     header("Location:../index.php");
@@ -34,8 +34,10 @@
                 </a>
                 <div class="collapse" id="collapseLayouts<?php echo $key;?>" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
-                    <?php if($module == 'order'): ?>
+                    <?php if($module == 'Orders'): ?>
                         <a class="nav-link" href="<?php  echo Url($module.'/');?>">Control</a>
+                    <?php elseif($module == 'check'): ?>
+                        <a class="nav-link" href="<?php  echo Url($module.'/');?>">Control</a>       
                     <?php else: ?>
                         <a class="nav-link" href="<?php  echo Url($module.'/create.php');?>"> + Create</a>
                         <a class="nav-link" href="<?php  echo Url($module.'/');?>">Control</a>
