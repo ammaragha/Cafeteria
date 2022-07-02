@@ -1,0 +1,17 @@
+{
+    "name": "asamirsherif/simple-cafe-system",
+    "type": "project",
+    "description": "a simple cafe order mangment system but with a powerful MVC structure",
+    "keywords": ["login", "auth", "user", "authentication", "mvc", "membership","cafe","order","system"],
+    "homepage": "https://github.com/asamirsherif/simple-cafe-system",
+    "license": "MIT",
+    "require-dev": {
+        "php": ">=5.5.0",
+        "phpmailer/phpmailer": "~6.0",
+        "gregwar/captcha": "~1.1",
+        "phpunit/phpunit": "4.8.*|5.7.*"
+    },
+    "autoload": {
+        "psr-4": { "": ["application/core/", "application/model/"] }
+    }
+}
