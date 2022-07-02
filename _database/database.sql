@@ -1,7 +1,7 @@
-CREATE DATABASE IF NOT EXISTS `huge`;
+-- CREATE DATA BASE FIRST 
 
 
-CREATE TABLE IF NOT EXISTS `huge`.`users` (
+CREATE TABLE `users` (
  `user_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'auto incrementing user_id of each user, unique index',
  `session_id` varchar(48) DEFAULT NULL COMMENT 'stores session cookie id to prevent session concurrency',
  `user_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT 'user''s name, unique',
