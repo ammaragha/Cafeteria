@@ -77,7 +77,7 @@ function Clean($input){
 
    function Url($url = null){
 
-     return   'http://'.$_SERVER['HTTP_HOST'].'/projectphp/admin/'.$url;
+     return   'http://'.$_SERVER['HTTP_HOST'].'/cafeteria/admin/'.$url;
 
    }
 

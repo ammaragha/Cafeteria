@@ -28,6 +28,9 @@ $op  = mysqli_query($con,$sql);
       table{
         border: 3px solid black;
       }
+      img{
+        height:90px;
+      }
     </style>
 </head>
 <body>
@@ -80,5 +83,24 @@ $op  = mysqli_query($con,$sql);
          ?>
       </tbody>
   </table>
+  
+    <div class="container m-auto me-5 col-md-12 row">
+    <?php
+    $sql = 'select *  from  product ';
+$op = mysqli_query($con,$sql);
+?>
+ <?php    
+           while($data = mysqli_fetch_assoc($op)){
+        ?>
+        <div class="card row m-2 col-md-6" style="width: 18rem;">
+  <img src="./Admin/Products/uploads/<?php echo $data['image'];?>" class="card-img-top" alt="...">
+  <div class="card-body text-center">
+    <h5 class="card-title"><?php echo $data['name'];?></h5>
+    <p><?php echo"price:-".$data['price']." L.E";?></p>
+  </div>
+</div>
+      <?php } ?>
+    
+           </div>
 </body>
 </html>
