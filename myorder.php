@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 require_once("dbcontroller.php");
 $db_handle = new DBController();
@@ -43,15 +42,13 @@ switch($_GET["action"]) {
 	break;	
 }
 }
-
 ?>
 <HTML>
 <HEAD>
 <TITLE>Add Order</TITLE>
-
-<link href="style.css" type="text/css" rel="stylesheet" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
+<link href="style.css" type="text/css" rel="stylesheet" />
 </HEAD>
 <BODY>
 <nav class="navbar navbar-expand-lg bg-light">
@@ -70,9 +67,7 @@ switch($_GET["action"]) {
   </div>
 </nav>
 <div id="shopping-cart">
-	
 <div class="txt-heading">User : Mohamed</div>
-
 
 <a id="btnEmpty" href="index.php?action=empty">Cancel All Orders</a>
 <?php
@@ -112,8 +107,9 @@ if(isset($_SESSION["cart_item"])){
 <td colspan="2" align="right">Total:</td>
 <td align="right"><?php echo $total_quantity; ?></td>
 <td align="right" colspan="2"><strong><?php echo "$ ".number_format($total_price, 2); ?></strong></td>
-<td><input type="submit" value="Confirm" class="btn btn-success" /></div></td>
+<td></td>
 </tr>
+
 </tbody>
 </table>		
   <?php
@@ -125,29 +121,6 @@ if(isset($_SESSION["cart_item"])){
 ?>
 </div>
 
-<div id="product-grid">
-	<div class="txt-heading">Products</div>
-	<?php
-	$product_array = $db_handle->runQuery("SELECT * FROM tblproduct ORDER BY id ASC");
-	if (!empty($product_array)) { 
-		foreach($product_array as $key=>$value){
-	?>
-		<div class="product-item">
-			<form method="post" action="index.php?action=add&code=<?php echo $product_array[$key]["code"]; ?>">
-			<div class="product-image"><img src="<?php echo $product_array[$key]["image"];?>" style="
-    width: 100%;"></div>
-			<div class="product-tile-footer">
-			<div class="product-title"><?php echo $product_array[$key]["name"]; ?></div>
-			<div class="product-price"><?php echo "$".$product_array[$key]["price"]; ?></div>
-			<div class="cart-action"><input type="text" class="product-quantity" name="quantity" value="1" size="2" />
-			<input type="submit" value="Add Order" class="btnAddAction" /></div>
-			</div>
-			</form>
-		</div>
-	<?php
-		}
-	}
-	?>
-</div>
+
 </BODY>
 </HTML>
