@@ -1,5 +1,5 @@
 <?php 
-require './Admin/helpers/dbConnection.php';
+require '../helpers/dbConnection.php';
 
 $sqluser = "select * from user";
 $objData = mysqli_query($con,$sqluser);
@@ -22,7 +22,7 @@ $op  = mysqli_query($con,$sql);
     <style>
       .div1{
         height: 50vh;
-        background: url("./Admin/assetsDir/assets/img/download.jpg")no-repeat center/cover;
+        background: url("../assetsDir/assets/img/download.jpg")no-repeat center/cover;
         color:white;
       }
       table{
@@ -37,11 +37,11 @@ $op  = mysqli_query($con,$sql);
   <div class="div1 container-fluid">
 <nav class="navbar container-fluid justify-content-between ">
     <div class="col-md-5  ps-4">
-    <a class="navbar-brand active text-light" href="./index.php">Home</a>
-    <a class="navbar-brand text-light" href="#">My Order</a>
+    <a class="navbar-brand active text-light" href="../../index.php">Home</a>
+    <a class="navbar-brand text-light" >My Order</a>
     </div>
     <div  class="col-md-2 ">
-    <img src="./Admin/Users/uploads/<?php echo $_SESSION['user']['image']; ?>" alt="" height="50px" width="50px">
+    <img src="../Users/uploads/<?php echo $_SESSION['user']['image']; ?>" alt="" height="50px" width="50px">
     <?php  echo $_SESSION['user']['name'];?>
     </div>
 </nav>
@@ -93,7 +93,7 @@ $op = mysqli_query($con,$sql);
            while($data = mysqli_fetch_assoc($op)){
         ?>
         <div class="card row m-2 col-md-6" style="width: 18rem;">
-  <img src="./Admin/Products/uploads/<?php echo $data['image'];?>" class="card-img-top" alt="...">
+  <img src="../Products/uploads/<?php echo $data['image'];?>" class="card-img-top" alt="...">
   <div class="card-body text-center">
     <h5 class="card-title"><?php echo $data['name'];?></h5>
     <p><?php echo"price:-".$data['price']." L.E";?></p>

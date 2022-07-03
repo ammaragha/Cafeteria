@@ -1,6 +1,6 @@
 <?php 
 
-require './Admin/helpers/dbConnection.php';
+require '../helpers/dbConnection.php';
 
 $id = $_GET['id'];
 

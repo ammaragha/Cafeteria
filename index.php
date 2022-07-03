@@ -4,7 +4,7 @@ require './Admin/helpers/dbConnection.php';
 $sqluser = "select * from user";
 $objData = mysqli_query($con,$sqluser);
 
-$sql = 'select product.*,category.*  from  product inner join category  on product.category_id = category.id';
+$sql = 'select product.*,product.id as "pro_id",category.*  from  product inner join category  on product.category_id = category.id';
 $op  = mysqli_query($con,$sql);
 
 ?>
@@ -58,6 +58,7 @@ $op  = mysqli_query($con,$sql);
           </div>
           <div class="post-desc">
             <div class="post-title">
+              <p><?php echo $data['pro_id']?></p>
               <h5><?php echo $data['name'].'('.$data['title'].')';?></h5>
             </div>
             <p><?php echo"price:-".$data['price']." L.E";?></p>
