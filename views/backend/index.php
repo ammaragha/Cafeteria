@@ -1,9 +1,3 @@
-<?php
-require_once "config/app.php";
-require_once ADMIN_HEADER;
-require_once ADMIN_NAV;
-require_once ADMIN_SIDENAV;
-?>
 
 <main>
     <div class="container-fluid">
@@ -71,4 +65,5 @@ require_once ADMIN_SIDENAV;
         </div>
     </div>
 </main>
-<?php require_once ADMIN_FOOT; ?>
+
+

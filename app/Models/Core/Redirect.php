@@ -5,15 +5,17 @@ namespace App\Models\Core;
 class Redirect
 {
 
-    static $context = "Location:";
+    static $context = "Location: ";
 
 
-    static function to($page)
+    static function to($page, $type = null)
     {
         $page = rtrim($page, ".php");
         $page = empty($page) ? "index" : $page;
-        $loc = self::$context . $page . ".php";
-        header($loc);
+        if (is_null($type)) $loc = self::$context . $page . ".php";
+        else $loc = self::$context . $page . ".php?page=" . $type;
+        //die($loc);
+         header($loc);
     }
 
     static function back()
@@ -21,8 +23,8 @@ class Redirect
         self::to($_SERVER['HTTP_REFERER']);
     }
 
-    public function __destruct()
-    {
-        exit;
-    }
+    // public function __destruct()
+    // {
+    //     exit;
+    // }
 }

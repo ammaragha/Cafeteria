@@ -7,6 +7,15 @@ define('APP_ROOT', dirname(dirname(__FILE__)));
 define('URL_ROOT', '/');
 define('URL_SUBFOLDER', '');
 
+//Paths
+define('PUBLIC_ROOT',  "/public/");
+define('VIEW_ROOT', APP_ROOT . "/views/");
+
+define("ADMIN_HEADER", VIEW_ROOT . "/backend/layouts/header.php");
+define("ADMIN_NAV", VIEW_ROOT . "/backend/layouts/nav.php");
+define("ADMIN_SIDENAV", VIEW_ROOT . "/backend/layouts/sidNav.php");
+define('ADMIN_FOOT', VIEW_ROOT . "/backend/layouts/footer.php");
+
 //DB Params
 define('DB_HOST', '127.0.0.1');
 define('DB_USER', 'root');
