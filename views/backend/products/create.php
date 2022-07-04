@@ -34,7 +34,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="exampleInputPassword">Categore</label>
+                        <label for="exampleInputPassword">Category</label>
                         <select class="form-control" id="exampleInputPassword1" name="cat_id" required>
                             <option value="">..</option>
                             <?php

@@ -17,6 +17,7 @@ class Model extends DBConnect
     {
         $stmt = $this->con->prepare("SELECT * FROM $this->table");
         $stmt->execute();
+        
         $res = $stmt->fetchAll();
         return count($res) > 0 ? $res : false;
     }
@@ -40,7 +41,7 @@ class Model extends DBConnect
     }
 
     //update
-    public function update(int $id, array $data): void
+    public function update(int $id, array $data)
     {
         $keys = array_reduce(array_keys($data), function ($pre, $i) {
             $pre .= "$i=? ,";
@@ -55,7 +56,7 @@ class Model extends DBConnect
 
 
     //delete
-    public function delete(int $id): bool
+    public function delete(int $id)
     {
         $stmt = $this->con->prepare("DELETE FROM $this->table WHERE id=$id");
         $res = $stmt->execute();
