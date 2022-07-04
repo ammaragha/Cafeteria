@@ -6,11 +6,12 @@ class FileSys
     private $imgName;
     private $imgType;
     private $imgTmpName;
-    private $dir = "images/";
+    private $dir;
 
 
-    function __construct(array $file)
+    function __construct(array $file,$dir="images/")
     {
+        $this->dir = $dir;
         if ($file) {
             $this->imgName = $file['name'];
             $this->imgType = pathinfo($this->imgName, PATHINFO_EXTENSION);
@@ -18,6 +19,7 @@ class FileSys
         } else {
             throw new ErrorException("No file :/");
         }
+       
     }
 
     public function genName()

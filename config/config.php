@@ -8,7 +8,7 @@ define('URL_ROOT', '/');
 define('URL_SUBFOLDER', '');
 
 //Paths
-define('PUBLIC_ROOT',  "/public/");
+define('PUBLIC_ROOT',  "public/");
 define('VIEW_ROOT', APP_ROOT . "/views/");
 
 define("ADMIN_HEADER", VIEW_ROOT . "/backend/layouts/header.php");

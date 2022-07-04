@@ -1,19 +1,22 @@
-
-
 <main>
     <div class="container-fluid">
         <h1 class="mt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Dashboard/Products/Create</li>
+            <li class="breadcrumb-item active">Dashboard/Products/Edit</li>
 
             <?php
             echo '<br>';
             if (isset($_SESSION['Message'])) {
                 Messages($_SESSION['Message']);
-            
+
                 unset($_SESSION['Message']);
             }
-            
+
+            if (isset($_SESSION['data']))
+                $data = $_SESSION['data'];
+            else
+                die('no data');
+
             ?>
 
         </ol>
@@ -23,45 +26,52 @@
 
             <div class="card-body">
 
-                <form action="edit.php?id=<?php echo $BlogData['id']; ?>" method="post" enctype="multipart/form-data">
-
+                <form action="<?= 'products.php?page=update' ?>" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="<?= $data['id'] ?>">
                     <div class="form-group">
                         <label for="exampleInputName">Name</label>
-                        <input type="text" class="form-control" id="exampleInputName" name="name" aria-describedby=""
-                            placeholder="Enter name" value="<?php echo $BlogData['name']; ?>">
+                        <input type="text" class="form-control" id="exampleInputName" name="name" aria-describedby="" placeholder="Enter name" value="<?php echo $data['name']; ?>">
                     </div>
 
 
                     <div class="form-group">
                         <label for="exampleInputPassword">category</label>
-                        <select class="form-control" id="exampleInputPassword1" name="category_id">
+                        <select class="form-control" id="exampleInputPassword1" name="cat_id">
 
                             <?php
-                               while($data = mysqli_fetch_assoc($CatOp)){
-                            ?>
-
-                            <option value="<?php echo $data['id']; ?>" <?php if ($data['id'] == $BlogData['category_id']) {
-    echo 'selected';
-} ?>><?php echo $data['title']; ?></option>
-
-                            <?php }
+                            if (isset($_SESSION['categories'])) {
+                                $categories = $_SESSION['categories'];
+                                foreach ($categories as $category) {
+                                    $catID = $category['id'];
+                                    $checked = $catID == $data['cat_id'] ? "selected" : "";
+                                    echo "<option value='$catID' $checked>" . $category['name'] . "</option>";
+                                }
+                            }
                             ?>
 
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputName"> Price</label>
-                        <textarea class="form-control" id="exampleInputName"
-                            name="price"> <?php echo $BlogData['price']; ?></textarea>
+                        <input class="form-control" id="exampleInputName" name="price" value="<?php echo $data['price']; ?>">
                     </div>
 
-
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" name="avilable" id="flexCheckDefault" <?php
+                                                                                                                        if ($data['avilable'] == 1)
+                                                                                                                            echo "checked";
+                                                                                                                        ?>>
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Avilable
+                        </label>
+                    </div>
+                    <hr>
                     <div class="form-group">
                         <label for="exampleInputName">Image</label>
                         <input type="file" name="image">
                     </div>
 
-                    <img src="./uploads/<?php echo $BlogData['image']; ?>" alt="" height="50px" width="50px"> <br>
+                    <img src="<?php echo $data['image']; ?>" alt="" height="50px" width="50px"> <br>
 
 
                     <button type="submit" class="btn btn-primary">Edit</button>
@@ -71,8 +81,3 @@
         </div>
     </div>
 </main>
-
-
-<?php
-require '../layouts/footer.php';
-?>

@@ -1,4 +1,3 @@
-
 <main>
     <div class="container-fluid">
         <h1 class="mt-4">Dashboard</h1>
@@ -9,10 +8,10 @@
             echo '<br>';
             if (isset($_SESSION['Message'])) {
                 Messages($_SESSION['Message']);
-            
+
                 unset($_SESSION['Message']);
             }
-            
+
             ?>
 
         </ol>
@@ -22,25 +21,22 @@
 
             <div class="card-body">
 
-                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" enctype="multipart/form-data">
+                <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) . '?page=store' ?>" method="post" enctype="multipart/form-data">
 
                     <div class="form-group">
                         <label for="exampleInputName">Name</label>
-                        <input type="text" class="form-control" id="exampleInputName" name="name" aria-describedby=""
-                            placeholder="Enter Name">
+                        <input type="text" class="form-control" id="exampleInputName" name="name" aria-describedby="" placeholder="Enter Name">
                     </div>
 
 
                     <div class="form-group">
                         <label for="exampleInputEmail">Email address</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" name="email"
-                            aria-describedby="emailHelp" placeholder="Enter email">
+                        <input type="text" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email">
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputPassword">New Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1" name="password"
-                            placeholder="Password">
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
                     </div>
 
 
@@ -53,11 +49,16 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="exampleInputPassword">Room number</label>
+                        <input type="text" class="form-control" id="exampleInputName" name="room_num" aria-describedby="" placeholder="Enter room number">
+
+                    </div>
+
 
                     <div class="form-group">
                         <label for="exampleInputName">Phone</label>
-                        <input type="text" class="form-control" id="exampleInputName" name="phone" aria-describedby=""
-                            placeholder="Enter phone">
+                        <input type="text" class="form-control" id="exampleInputName" name="phone" aria-describedby="" placeholder="Enter phone">
                     </div>
 
 
@@ -77,4 +78,3 @@
         </div>
     </div>
 </main>
-

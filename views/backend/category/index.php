@@ -46,14 +46,14 @@
                                     $count++;
                                     $id = $row['id'];
                                     echo "<tr>";
-                                    echo "<th>$count</th>";
-                                    echo "<th>" . $row['name'] . "</th>";
-                                    echo "<th>
+                                    echo "<td>$count</td>";
+                                    echo "<td>" . $row['name'] . "</td>";
+                                    echo "<td>
                                             <form action='categories.php?page=delete&id=$id' method='POST'>
                                                 <a href='categories.php?page=edit&id=$id' class='btn btn-primary'>Edit</a>
                                                 <input type='submit' class='btn btn-danger' value='Delete'/>
                                             </form> 
-                                        </th>";
+                                        </td>";
                                     echo "</tr>";
                                 }
                                 unset($_SESSION['data']);

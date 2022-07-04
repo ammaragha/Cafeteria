@@ -7,4 +7,3 @@ require __DIR__.'/config.php';
 
 
 $page= isset($_GET['page'])? $_GET['page'] : "";
-use Models\SessionSys;

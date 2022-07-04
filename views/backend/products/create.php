@@ -1,5 +1,3 @@
-
-
 <main>
     <div class="container-fluid">
         <h1 class="mt-4">Dashboard</h1>
@@ -10,10 +8,10 @@
             echo '<br>';
             if (isset($_SESSION['Message'])) {
                 Messages($_SESSION['Message']);
-            
+
                 unset($_SESSION['Message']);
             }
-            
+
             ?>
 
         </ol>
@@ -23,12 +21,11 @@
 
             <div class="card-body">
 
-                <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" enctype="multipart/form-data">
+                <form action="<?=  htmlspecialchars($_SERVER['PHP_SELF'])."?page=store" ?>" method="post" enctype="multipart/form-data">
 
-                <div class="form-group">
+                    <div class="form-group">
                         <label for="exampleInputName">Name</label>
-                        <input type="text" class="form-control" id="exampleInputName" name="name" aria-describedby=""
-                            placeholder="Enter name">
+                        <input type="text" class="form-control" id="exampleInputName" name="name" aria-describedby="" placeholder="Enter name">
                     </div>
 
                     <div class="form-group">
@@ -38,12 +35,30 @@
 
                     <div class="form-group">
                         <label for="exampleInputPassword">Categore</label>
-                        <select class="form-control" id="exampleInputPassword1" name="category_id">
-
-
+                        <select class="form-control" id="exampleInputPassword1" name="cat_id" required>
+                            <option value="">..</option>
+                            <?php
+                            if (isset($_SESSION['categories'])) {
+                                $categories = $_SESSION['categories'];
+                                foreach ($categories as $category) {
+                                    $catID = $category['id'];
+                                    echo "<option value='$catID'>" . $category['name'] . "</option>";
+                                }
+                            }
+                            ?>
                         </select>
                     </div>
 
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="1" name="avilable" id="flexCheckDefault" checked>
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Avilable
+                        </label>
+                    </div>
+
+
+                    <hr>
                     <div class="form-group">
                         <label for="exampleInputName">Image</label>
                         <input type="file" name="image">

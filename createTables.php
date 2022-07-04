@@ -3,7 +3,7 @@ require_once "config/app.php";
 
 use App\Models\Table;
 use App\Models\Core\Redirect;
-
+use App\Models\User;
 
 
 $usersTable = new Table('users');
@@ -16,18 +16,20 @@ try {
     $usersTable->create("
         id int PRIMARY KEY AUTO_INCREMENT,
         name varchar(50),
-        email varchar(100) NOT NULL,
+        email varchar(100)  NOT NULL,
         password varchar(255) NOT NULL,
         image varchar(100),
         role ENUM('0','1') DEFAULT '0',
-        room_num varchar(20)
+        room_num varchar(20),
+        UNIQUE (email) 
     ");
 
     $productsTable->create("
         id int PRIMARY KEY AUTO_INCREMENT,
         name varchar(50) NOT NULL,
         image varchar(100),
-        price  DOUBLE(10, 2) NOT NULL
+        price  DOUBLE(10, 2) NOT NULL,
+        avilable ENUM('0','1') DEFAULT '1'
     ");
 
     $categoriesTable->create("
@@ -51,6 +53,13 @@ try {
 
     $ordersTable->addFK("user_id", "users", "id");
 
+    //add admin
+    (new User)->insert([
+        'name'=>'admin',
+        'email'=>'admin@admin.com',
+        'password'=>'admin',
+        'role'=>'1',
+    ]);
 
 } catch (\PDOException $e) {
    // die('PDO ERROR: ' . $e->getMessage());

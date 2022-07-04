@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Models\Core;
+
 class Model extends DBConnect
 {
     protected $table;
@@ -62,9 +64,10 @@ class Model extends DBConnect
 
 
     //where
-    public function where($vars)
+    public function where($vars, $limits = 0)
     {
-        $stmt = $this->con->prepare("SELECT * FROM $this->table WHERE $vars");
+        $limits = $limits > 0 ? "LIMIT $limits" : "";
+        $stmt = $this->con->prepare("SELECT * FROM $this->table WHERE $vars $limits");
         $stmt->execute();
         return $stmt->fetchAll();
     }
