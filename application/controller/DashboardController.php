@@ -21,6 +21,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $this->View->render('dashboard/index');
+        $this->View->render('dashboard/index', array(
+            'user_name' => Session::get('user_name'),
+            'user_email' => Session::get('user_email'),
+            'user_gravatar_image_url' => Session::get('user_gravatar_image_url'),
+            'user_avatar_file' => Session::get('user_avatar_file'),
+            'user_account_type' => Session::get('user_account_type')
+        ));
     }
 }

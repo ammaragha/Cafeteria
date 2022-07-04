@@ -42,7 +42,7 @@
             <!-- register box on right side -->
             <div class="register-box">
                 <h2>No account yet ?</h2>
-                <a href="<?php echo Config::get('URL'); ?>register/index">Register</a>
+                <a href="<?php echo Config::get('URL'); ?>dashboard">Register</a>
             </div>
 
         </div>
