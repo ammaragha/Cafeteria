@@ -10,7 +10,9 @@ class Redirect
 
     static function to($page, $type = null)
     {
-        $page = rtrim($page, ".php");
+        //die($page);
+
+        //$page = rtrim($page, ".php");
         $page = empty($page) ? "index" : $page;
         if (is_null($type)) $loc = self::$context . $page . ".php";
         else $loc = self::$context . $page . ".php?page=" . $type;

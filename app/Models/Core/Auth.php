@@ -16,9 +16,9 @@ class Auth
 
     static function make($email, $password)
     {
-        $user = (new User)->where("email='$email' AND password='$password'", 1);
-        if ($user) {
 
+        $user = (new User)->where("email='$email' AND password='$password'");
+        if ($user) {
             SessionSys::setNew(['AUTH' => $user]);
             return new Auth($user);
         } else return false;

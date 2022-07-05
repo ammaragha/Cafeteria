@@ -1,21 +1,20 @@
 <?php
 require_once "config/app.php";
-require_once ADMIN_HEADER;
-require_once ADMIN_NAV;
-require_once ADMIN_SIDENAV;
-?>
-<?php
+require_once FRONT_HEADER;
+require_once FRONT_NAV;
 
-use App\Models\Core\Auth;
+//--------------------------------------------------
 
-Auth::make("admin@admin.com", 'admin');
-if (Auth::check())
-    echo "done";
-else
-    echo "wrong";
+use App\Controllers\AppController;
 
-    var_dump($_SESSION['AUTH'])
+$appController = new AppController;
 
-?>
+if ($page == "myorder") {
+} else {
+    $appController->index();
+}
 
-<?php require_once ADMIN_FOOT; ?>
+
+
+//--------------------------------------------------
+require_once FRONT_FOOT;

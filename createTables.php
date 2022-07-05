@@ -44,7 +44,7 @@ try {
         status ENUM('processing','out','done') DEFAULT 'processing'
     ");
 
-    $orderProductsTable->create("order_id int,product_id int");
+    $orderProductsTable->create("order_id int,product_id int,quantity int");
     $orderProductsTable->addFK("order_id", "orders", "id");
     $orderProductsTable->addFK("product_id", "products", "id");
 
