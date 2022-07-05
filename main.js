@@ -12,13 +12,18 @@ for (let i = 0; i < productHolder.length; i++) {
             let itemHolder = document.createElement("div");
             itemHolder.className = "itemHolder";
 
-                    //console.log(productHolder[i].children[1]); //product 
-                    //  console.log(productHolder[i].children[1].children[0].textContent); //product Name
-                    // console.log(productHolder[i].children[1].children[1].children[1].textContent); //product Price
+            // console.log(productHolder[i].children[1]); //product 
+            //  console.log(productHolder[i].children[1].children[0].textContent); //product Name
+            // console.log(productHolder[i].children[1].children[1].children[1].textContent); //product Price
+            // console.log(productHolder[i].children[1].children[2].children[1].textContent); //product ID
 
             let productName = document.createElement("h6");
             productName.className = "itemName";
             productName.innerHTML = productHolder[i].children[1].children[0].textContent;
+
+            let productID = document.createElement("h3");
+            productID.setAttribute("style", "display:none;");
+            productID.innerHTML = productHolder[i].children[1].children[2].children[1].textContent;
 
             let productPrice = document.createElement("h6");
             productPrice.className = "itemPrice";
@@ -43,31 +48,34 @@ for (let i = 0; i < productHolder.length; i++) {
             removeBtn.className = "removeitm";
             removeBtn.innerHTML = "X";
 
-            let hr = document.createElement("hr");  
+            let hr = document.createElement("hr");
             hr.setAttribute("style", "display:contents;");
 
             itemHolder.appendChild(productName);
-            
+
             itemHolder.appendChild(plusBtn);
             itemHolder.appendChild(productQuantity);
             itemHolder.appendChild(minusBtn);
             itemHolder.appendChild(productPrice);
             itemHolder.appendChild(removeBtn);
+            itemHolder.appendChild(productID);
 
             itemHolder.appendChild(hr);
+
             orderedItems.appendChild(itemHolder);
             productClicked[i] = true;
 
             plusBtn.addEventListener("click", function () {
                 let itemQuantity = parseInt(productQuantity.innerHTML, 10);
                 itemQuantity += 1;
-      
+
                 let itemPrice = parseFloat(productHolder[i].children[1].children[1].children[1].textContent);
                 totalPrice += itemPrice;
                 totalPriceNode.innerHTML = totalPrice;
                 itemPrice += parseFloat(productPrice.innerHTML);
                 productPrice.innerHTML = itemPrice;
                 productQuantity.innerHTML = itemQuantity;
+                
             });
 
             minusBtn.addEventListener("click", function () {
@@ -103,3 +111,70 @@ for (let i = 0; i < productHolder.length; i++) {
     });
 }
 
+
+// confirm fun & ajax request
+
+let confirmBtn = document.getElementsByClassName("confirmOrder")[0];
+confirmBtn.addEventListener("click", function (e) {
+
+    e.preventDefault();
+    let orderedProducts = document.getElementsByClassName("orderedItems")[0];
+
+    if (orderedProducts.children.length > 0) {
+
+        let dataObj = {
+            user_id: document.getElementById("user").value,
+            room: document.getElementById("rooms").options[document.getElementById("rooms").selectedIndex].value,
+            notes: document.getElementById("notes").value,
+            total: document.getElementsByClassName("total")[0].textContent,
+            items: []
+        };
+
+        // console.log(dataObj);
+
+        let obj = {};
+        for (let i = 0; i < orderedProducts.children.length; i++) {
+            obj = {
+                product_id: orderedProducts.children[i].children[6].textContent,
+                quantity: orderedProducts.children[i].children[2].textContent,
+            }
+            dataObj.items.push(obj);
+        }
+
+        console.log(dataObj);
+
+        $.ajax({
+            url: "order.php",
+            type: "POST",
+            dataType: "json",
+            data: dataObj,
+            success: function (data) {           // if success
+                if (data.statusCode == 200) {
+
+                    alert("Order Done Successfully");
+                    document.getElementById("notes").value = "";
+                    document.getElementById("rooms").selectedIndex = 0;
+                    document.getElementsByClassName("total")[0].textContent = 0;
+                    document.getElementById("user");
+                    let child = orderedItems.lastChild;
+                    let i = 0;
+                    while (child) {
+                        orderedItems.removeChild(child);
+                        child = orderedItems.lastChild;
+                        productClicked[i] = false;
+                        i++;
+                    }
+
+                } else {
+                    alert("Failed to make your Order");
+
+                }
+
+            }
+        });
+    }
+    else {
+        alert("Connot Make an Empty Order");
+    }
+
+});
