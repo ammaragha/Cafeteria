@@ -4,7 +4,7 @@ require './Admin/helpers/dbConnection.php';
 $sqluser = "select * from user";
 $objData = mysqli_query($con, $sqluser);
 
-$sql = 'select product.*,category.*  from  product inner join category  on product.category_id = category.id';
+$sql = 'select product.*, category.*, product.id as pid from  product inner join category  on product.category_id = category.id';
 $op  = mysqli_query($con, $sql);
 
 ?>
@@ -90,7 +90,9 @@ $op  = mysqli_query($con, $sql);
                                 <p class="card-text"><span>price:</span>
                                     <span> <?php echo $data['price'] ?> </span> <span>LE</span>
                                 </p>
-                                <!-- <p class="card-text"><?php echo "id:-" . $data['product.id']; ?></p> -->
+                                <p class="card-text productid"><span>P_ID:</span>
+                                    <span> <?php echo $data['pid']; ?></span>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -102,6 +104,7 @@ $op  = mysqli_query($con, $sql);
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="main.js"></script>
+    
 </body>
 
 </html>
