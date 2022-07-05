@@ -20,32 +20,51 @@ $op  = mysqli_query($con,$sql);
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <style>
-      .div1{
-        height: 50vh;
-        background: url("../assetsDir/assets/img/download.jpg")no-repeat center/cover;
-        color:white;
-      }
+     
       table{
         border: 3px solid black;
       }
       img{
         height:90px;
       }
+      .userimg img{
+        width: 50px;
+        height: 50px;
+      }
     </style>
 </head>
 <body>
-  <div class="div1 container-fluid">
-<nav class="navbar container-fluid justify-content-between ">
-    <div class="col-md-5  ps-4">
-    <a class="navbar-brand active text-light" href="../../index.php">Home</a>
-    <a class="navbar-brand text-light" >My Order</a>
-    </div>
-    <div  class="col-md-2 ">
-    <img src="../Users/uploads/<?php echo $_SESSION['user']['image']; ?>" alt="" height="50px" width="50px">
-    <?php  echo $_SESSION['user']['name'];?>
-    </div>
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Cafeteria</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="../../index.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="myorder.php">My Order</a>
+                    </li>
+
+                </ul>
+                <span class="navbar-text userimg">
+                    <img src="../Users/uploads/<?php echo $_SESSION['user']['image']; ?>" alt="" height="50px" width="50px">
+
+                </span>
+                <span class="navbar-text username">
+                    <a href="#"><?php echo $_SESSION['user']['name']; ?></a>
+
+                </span>
+                <input type="hidden" id="user" value="<?php echo ($_SESSION['user']["id"]); ?>">
+            </div>
+        </div>
 </nav>
-</div>
+
+
 <br>
 <h2 class="container">My Orders</h2><br>
   <table class="table table-bordered container rounded-3" id="dataTable" width="100%" cellspacing="0">

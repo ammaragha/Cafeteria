@@ -1,15 +1,16 @@
-<?php 
+<?php
 require './Admin/helpers/dbConnection.php';
 
 $sqluser = "select * from user";
-$objData = mysqli_query($con,$sqluser);
+$objData = mysqli_query($con, $sqluser);
 
-$sql = 'select product.*,product.id as "pro_id",category.*  from  product inner join category  on product.category_id = category.id';
-$op  = mysqli_query($con,$sql);
+$sql = 'select product.*,category.* ,product.id as"pro_id" from  product inner join category  on product.category_id = category.id';
+$op  = mysqli_query($con, $sql);
 
 ?>
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -18,54 +19,106 @@ $op  = mysqli_query($con,$sql);
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+    </script>
+
+    <link rel="stylesheet" href="style.css">
     <style>
-      .post-image{
-        height: 150px;
+      .productimg{
+        height: 100px;
       }
       button{
-        border-radius: 5px;
-      }
-      .div1{
-        height: 50vh;
-        background: url("./Admin/assetsDir/assets/img/download.jpg")no-repeat center/cover;
-        color:white;
+        border-radius: 10px;
+        margin: 5px;
       }
     </style>
+
 </head>
+
 <body>
-  <div class="div1 container-fluid">
-<nav class="navbar container-fluid justify-content-between ">
-    <div class="col-md-5  ps-4">
-    <a class="navbar-brand active text-light">Home</a>
-    <a class="navbar-brand text-light" href="./Admin/Orders/myorder.php">My Order</a>
-    </div>
-    <div  class="col-md-2 ">
-    <img src="./Admin/Users/uploads/<?php echo $_SESSION['user']['image']; ?>" alt="" height="50px" width="50px">
-    <?php  echo $_SESSION['user']['name'];?>
-    </div>
-</nav>
-</div>
-<h2 class="text-center">Our Products</h2>
-<section class="container-fluid col-md-12 row  text-center text-dark">
-<div class=" container col-md-12 row border-2">
-     <?php    
-           while($data = mysqli_fetch_assoc($op)){
-        ?>
-        <div class="col-lg-2 col-md-2">
-          <div class="post-image">
-            <img class="img-fluid h-100 w-100" src="./Admin/Products/uploads/<?php echo $data['image'];?>" alt="">
-          </div>
-          <div class="post-desc">
-            <div class="post-title">
-              <p><?php echo $data['pro_id']?></p>
-              <h5><?php echo $data['name'].'('.$data['title'].')';?></h5>
+
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Cafeteria</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Admin/Orders/myorder.php">My Order</a>
+                    </li>
+
+                </ul>
+                <span class="navbar-text userimg">
+                    <img src="./Admin/Users/uploads/<?php echo $_SESSION['user']['image']; ?>" alt="" height="50px" width="50px">
+
+                </span>
+                <span class="navbar-text username">
+                    <a href="#"><?php echo $_SESSION['user']['name']; ?></a>
+
+                </span>
+                <input type="hidden" id="user" value="<?php echo ($_SESSION['user']["id"]); ?>">
             </div>
-            <p><?php echo"price:-".$data['price']." L.E";?></p>
-          </div>
         </div>
-      <?php } ?>
-</div>
-</section>
+    </nav>
+
+    <div class="container-fluid py-5 d-flex secdiv">
+        <div class="check p-2 col-md-4 ">
+            <h3>Items</h3>
+            <div class="orderedItems"></div>
+            <h6>Notes</h6>
+            <textarea name="orderNotes" id="notes" class="notearea"></textarea>
+            <div>
+                        <label for="rooms">Room:</label>
+                        <select class="form-control" id="rooms" name="room">
+
+                            <?php
+                               while($data = mysqli_fetch_assoc($objData)){
+                            ?>
+
+                            <option value="<?php echo $data['id']; ?>"><?php echo $data['room']; ?></option>
+
+                            <?php }
+                            ?>
+
+                        </select>
+            </div>     
+            <div class="py-4">
+                Total Price: <span class="total"></span> LE
+            </div>
+            <div class="d-flex justify-content-end">
+                <input type="submit" value="Confirm" class="confirmOrder savebtn btn btn-primary btn-lg">
+            </div>
+        </div>
+        <div class="products text-center col-md-8">
+            <div class="row gapping">
+                <?php
+                while ($data = mysqli_fetch_assoc($op)) {
+                ?>
+                    <div class="col-12 col-sm-6 col-md-4 col-xl-3 ">
+                        <div class="card productHolder mb-2">
+                            <img class="card-img-top productimg" src="./Admin/Products/uploads/<?php echo $data['image']; ?>" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $data['name'] . '(' . $data['title'] . ')'; ?></h5>
+                                <p class="card-text"><span>price:</span>
+                                    <span> <?php echo $data['price'] ?> </span> <span>LE</span>
+                                </p>
+                               <p class="card-text"><?php echo "id:-" . $data['pro_id']; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="main.js"></script>
 </body>
+
 </html>
