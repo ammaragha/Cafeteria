@@ -46,7 +46,7 @@ class Authcontroller extends Controller
             Redirect::to('index');
         } else {
             SessionSys::setNew(['err' => 'email or password wrong']);
-            Redirect::back();
+            Redirect::to('auth','login');
         }
     }
 

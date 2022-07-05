@@ -20,7 +20,7 @@
 
             if (Auth::check()) { ?>
                 <span class="navbar-text userimg">
-                    <img src="<?= Auth::check()::$user['image'] ?>" alt="" height="50px" width="50px">
+                    <img src="<?= Auth::check()::$user['image'] ?>" alt="IMG" height="50px" width="50px">
                 </span>
                 <span class="navbar-text username">
                     <?php if (Auth::check()::$user['role'] == '1') { ?>

@@ -11,13 +11,13 @@ class Redirect
     static function to($page, $type = null)
     {
         //die($page);
-
-        //$page = rtrim($page, ".php");
+        if ($page != 'auth')
+            $page = rtrim($page, ".php");
         $page = empty($page) ? "index" : $page;
         if (is_null($type)) $loc = self::$context . $page . ".php";
         else $loc = self::$context . $page . ".php?page=" . $type;
         //die($loc);
-         header($loc);
+        header($loc);
     }
 
     static function back()

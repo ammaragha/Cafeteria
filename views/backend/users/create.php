@@ -41,14 +41,7 @@
 
 
 
-                    <div class="form-group">
-                        <label for="exampleInputPassword">Role</label>
-                        <select class="form-control" id="exampleInputPassword1" name="role_id">
-
-
-                        </select>
-                    </div>
-
+                   
                     <div class="form-group">
                         <label for="exampleInputPassword">Room number</label>
                         <input type="text" class="form-control" id="exampleInputName" name="room_num" aria-describedby="" placeholder="Enter room number">
@@ -56,11 +49,7 @@
                     </div>
 
 
-                    <div class="form-group">
-                        <label for="exampleInputName">Phone</label>
-                        <input type="text" class="form-control" id="exampleInputName" name="phone" aria-describedby="" placeholder="Enter phone">
-                    </div>
-
+                  
 
                     <div class="form-group">
                         <label for="exampleInputName">Image</label>

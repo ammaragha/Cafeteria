@@ -41,7 +41,8 @@ try {
         id int PRIMARY KEY AUTO_INCREMENT,
         date DATE NOT NULL,
         total_price DOUBLE(10,2) NOT NULL,
-        status ENUM('processing','out','done') DEFAULT 'processing'
+        status ENUM('processing','out','done') DEFAULT 'processing',
+        notes varchar(200)
     ");
 
     $orderProductsTable->create("order_id int,product_id int,quantity int");

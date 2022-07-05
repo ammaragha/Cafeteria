@@ -58,7 +58,7 @@
                     <div class="collapse" id="collapseLayouts<?= "orders" ?>" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="orders.php">Control</a>
-                            <a class="nav-link" href="orders.php?page=create">+ Create</a>
+                            <a class="nav-link" href="orders.php?page=checks">Checks</a>
                         </nav>
                     </div>
 
