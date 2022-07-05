@@ -45,24 +45,28 @@
                             <?php
                             if (isset($_SESSION['data'])) {
                                 $data = $_SESSION['data'];
-                                $counter = 0;
-                                foreach ($data as $product) {
-                                    $counter++;
-                                    $id = $product['id'];
-                                    $notAv = $product['avilable'] == 0? "class='table-warning'>":"";
-                                    echo "<tr $notAv>";
-                                    echo "<td>" . $counter . "</td>";
-                                    echo "<td>" . $product['name'] . "</td>";
-                                    echo "<td>" . $product['price'] . "</td>";
-                                    echo "<td>" . \App\Models\Category::getName($product['cat_id']) . "</td>";
-                                    echo "<td> <img style='width:200px;max-width:100%;' src='" . $product['image'] . "'/></td>";
-                                    echo "<td>
+                                if ($data) {
+                                    $counter = 0;
+                                    foreach ($data as $product) {
+                                        $counter++;
+                                        $id = $product['id'];
+                                        $notAv = $product['avilable'] == 0 ? "class='table-warning'>" : "";
+                                        echo "<tr $notAv>";
+                                        echo "<td>" . $counter . "</td>";
+                                        echo "<td>" . $product['name'] . "</td>";
+                                        echo "<td>" . $product['price'] . "</td>";
+                                        echo "<td>" . \App\Models\Category::getName($product['cat_id']) . "</td>";
+                                        echo "<td> <img style='width:200px;max-width:100%;' src='" . $product['image'] . "'/></td>";
+                                        echo "<td>
                                             <form action='products.php?page=delete&id=$id' method='POST'>
                                                 <a href='products.php?page=edit&id=$id' class='btn btn-primary'>Edit</a>
                                                 <input type='submit' class='btn btn-danger' value='Delete'/>
                                             </form> 
                                         </td>";
-                                    echo "</tr>";
+                                        echo "</tr>";
+                                    }
+                                }else{
+                                    echo "<tr class='text-center'><td colspan='6'>NO DATA</td></tr>";
                                 }
                             }
                             ?>

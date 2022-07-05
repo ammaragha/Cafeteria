@@ -20,4 +20,4 @@ define('ADMIN_FOOT', VIEW_ROOT . "/backend/layouts/footer.php");
 define('DB_HOST', '127.0.0.1');
 define('DB_USER', 'root');
 define('DB_PASS', "");
-define('DB_NAME', 'itiphp');
+define('DB_NAME', 'phpmans');

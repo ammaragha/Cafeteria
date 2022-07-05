@@ -41,26 +41,26 @@
                             <?php
                             if (isset($_SESSION['data'])) {
                                 $data = $_SESSION['data'];
-                                $count = 0;
-                                foreach ($data as $row) {
-                                    $count++;
-                                    $id = $row['id'];
-                                    echo "<tr>";
-                                    echo "<td>$count</td>";
-                                    echo "<td>" . $row['name'] . "</td>";
-                                    echo "<td>
+                                if ($data) {
+                                    $count = 0;
+                                    foreach ($data as $row) {
+                                        $count++;
+                                        $id = $row['id'];
+                                        echo "<tr>";
+                                        echo "<td>$count</td>";
+                                        echo "<td>" . $row['name'] . "</td>";
+                                        echo "<td>
                                             <form action='categories.php?page=delete&id=$id' method='POST'>
                                                 <a href='categories.php?page=edit&id=$id' class='btn btn-primary'>Edit</a>
                                                 <input type='submit' class='btn btn-danger' value='Delete'/>
                                             </form> 
                                         </td>";
-                                    echo "</tr>";
+                                        echo "</tr>";
+                                    }
+                                } else {
+                                    echo "<tr class='text-center'><td colspan='6'>NO DATA</td></tr>";
                                 }
                                 unset($_SESSION['data']);
-                            } else {
-                                echo "<tr>";
-                                echo "<th>NO DATA</th>";
-                                echo "</tr>";
                             }
                             ?>
                         </tbody>
