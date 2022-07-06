@@ -46,10 +46,25 @@ class CategoryController extends Controller
      * @param Request $req
      * @return void
      */
+
+
     public function store(Request $req)
-    {
-        $this->category->insert($req->posts);
-        Redirect::to("categories");
+    {  //var_dump($req->inputs["name"]);die();
+      $errors=[];
+      $name=$req->inputs["name"];
+       if(empty($name)){
+           $errors['Name'] = "Required Field";
+        }elseif(strlen($name) < 6){
+           $errors['Name'] = "Invalid String"; 
+        }
+         if(count($errors) > 0){
+            SessionSys::setNew(["err"=>$errors]);
+            Redirect::to("categories","create");
+         }
+         else{
+          $this->category->insert($req->posts);
+          Redirect::to("categories");
+        }    
     }
 
 

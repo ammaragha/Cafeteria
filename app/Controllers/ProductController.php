@@ -50,18 +50,46 @@ class ProductController extends Controller
      */
     public function store(Request $req)
     {
-        //upload image
+       // var_dump($req);die();
+      $errors=[];
+      $name=$req->inputs["name"];
+      $price=$req->inputs["price"];
+      $cat_id=$req->inputs["cat_id"];
+       if(empty($name)){
+           $errors['name'] = "Required Field";
+        }elseif(strlen($name) < 6){
+           $errors['name'] = "Invalid String"; 
+        }if(empty($cat_id)){
+            $errors['cat_id'] = "Required Field";
+        }elseif(!FILTER_VALIDATE_INT){
+            $errors['cat_id'] = "Invalid id"; 
+        }if(empty($price)){
+            $errors['price'] = "Required Field";
+        }elseif(FILTER_VALIDATE_INT){
+            $errors['price'] = "Invalid int";
+        }
+        $img=$req->files['image'];
+        if(strlen($img['name'])>0){
         $img = new FileSys($req->files['image'], PUBLIC_ROOT . "images/products/");
         $img =  $img->upload();
+        
+        }else{
+        $errors['image'] = "Required Field";
+        }
         $req->posts['image'] = $img;
         //----------------------------------------
         //check avilablity
         $req->posts['avilable'] = $req->posts['avilable'] == "1" ? 1 : 0;
         //----------------------------------------
-
-        //$req->posts['admin_id']=1;
+         if(count($errors) > 0){
+            SessionSys::setNew(["err"=>$errors]);
+            Redirect::to("products","create");
+         }
+         else{
+         
         $this->product->insert($req->posts);
         Redirect::to("products");
+        }      
     }
 
 

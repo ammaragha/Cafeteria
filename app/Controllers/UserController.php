@@ -49,16 +49,47 @@ class UserController extends Controller
      * @return void
      */
     public function store(Request $req)
-    {
+    {//var_dump($req);die();
+        $errors=[];
+        $name=$req->inputs["name"];
+        $email=$req->inputs["email"];
+        $password=$req->inputs["password"];
+        $room_num=$req->inputs["room_num"];
+         if(empty($name)){
+             $errors['name'] = "Required Field";
+          }elseif(strlen($name) < 6){
+             $errors['name'] = "Invalid String"; 
+          }if(empty($email)){
+              $errors['email'] = "Required Field";
+          }elseif(!FILTER_VALIDATE_EMAIL){
+              $errors['email'] = "Invalid email"; 
+          }if(empty($password)){
+              $errors['password'] = "Required Field";
+          }elseif(strlen($password) < 6){
+            $errors['password'] = "Invalid lenght"; 
+         } if(empty($room_num)){
+            $errors['room_num'] = "Required Field";
+         }
         $img = $req->files['image'];
         if (strlen($img['name']) > 0) {
             $img = new FileSys($req->files['image'], PUBLIC_ROOT . "images/users/");
             $img =  $img->upload();
+        }else{
+            $errors['image'] = "Required Field";
         }
 
         $req->posts['image'] = $img;
-        $this->user->insert($req->posts);
-        Redirect::to("users");
+
+        if(count($errors) > 0){
+            SessionSys::setNew(["err"=>$errors]);
+            Redirect::to("users","create");
+         }
+         else{
+          
+          $this->user->insert($req->posts);
+          Redirect::to("users");
+        }      
+       
     }
 
 

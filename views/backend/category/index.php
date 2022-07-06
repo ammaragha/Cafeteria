@@ -5,14 +5,15 @@
             <li class="breadcrumb-item active">Dashboard/Category/display</li>
             <?php
 
-
+$Message=[];
             echo '<br>';
-            if (isset($_SESSION['Message'])) {
-                Messages($_SESSION['Message']);
-
-                unset($_SESSION['Message']);
+            if(isset($_SESSION['err'])){
+                $Message=$_SESSION['err'];
+                foreach ($Message as $key => $value) {       
+                    echo '* ' . $key . ' : ' . $value . '<br>';    
+                }
+                 unset($_SESSION['err']);
             }
-
 
             ?>
         </ol>
