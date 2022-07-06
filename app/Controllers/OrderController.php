@@ -87,4 +87,14 @@ class OrderController extends Controller
         $this->order->delete($req->inputs['id']);
         Redirect::back();
     }
+
+    public function viewOrder(Request $req)
+    {
+       $id = $req->inputs["id"];
+        $view_order=$this->order->find($id);
+        $_SESSION["data"]=$view_order;
+        $this->view("view.php");
+
+      
+    }
 }

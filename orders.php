@@ -15,7 +15,7 @@ if ($page === 'create') {
     $orderController->create();
 } elseif ($page === 'view') {
     $request = new Request('id');
-    $orderController->edit($request);
+    $orderController->viewOrder($request);
 } elseif ($page == 'checks') {
     $orderController->checks();
 } else {
