@@ -12,6 +12,8 @@ $appController = new AppController;
 
 if ($page == "myorder") {
 } elseif ($page == "makeorder" && $_SERVER['REQUEST_METHOD'] == 'POST') {
+    $request = new Request('items','notes');
+    $appController->makeorder($request);
 } else {
     $appController->index();
 }

@@ -87,4 +87,6 @@ class OrderController extends Controller
         $this->order->delete($req->inputs['id']);
         Redirect::back();
     }
+
+    
 }
