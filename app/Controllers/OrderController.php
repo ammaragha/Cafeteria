@@ -90,11 +90,9 @@ class OrderController extends Controller
 
     public function viewOrder(Request $req)
     {
-       $id = $req->inputs["id"];
-        $view_order=$this->order->find($id);
-        $_SESSION["data"]=$view_order;
+        $id = $req->inputs["id"];
+        $view_order = $this->order->find($id);
+        SessionSys::setNew(['data' => $view_order]);
         $this->view("view.php");
-
-      
     }
 }
