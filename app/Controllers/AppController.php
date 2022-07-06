@@ -27,8 +27,8 @@ class AppController extends Controller
     /**
      * make order
      */
-    public function maleorder(Request $req)
+    public function makeorder(Request $req)
     {
-        
+
     }
 }
