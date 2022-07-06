@@ -33,7 +33,7 @@ class Table extends DBConnect
     {
         $this->alter("$FK_IDName int");
         $constName = $FK_IDName . "_" . $PK_IDName;
-        $query = "ALTER TABLE $this->name ADD CONSTRAINT $constName FOREIGN KEY ($FK_IDName) REFERENCES $table($PK_IDName)";
+        $query = "ALTER TABLE $this->name ADD CONSTRAINT $constName FOREIGN KEY ($FK_IDName) REFERENCES $table($PK_IDName) ON DELETE CASCADE";
         $this->query($query)->execute();
     }
 }
