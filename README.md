@@ -9,6 +9,8 @@ ITI mansura PHP project
 <br>
 3- create DB by opening : {APP_URL}/createTables.php
 
+- make sure you have public/images/users/ and public/images/products/    FOLDERS
+
 <br>
 admin account
 
